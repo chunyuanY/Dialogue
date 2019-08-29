@@ -7,10 +7,11 @@ Python 3.x <br>
 Pytorch 1.1.0
 
 ## Datasets and Trained Models
-Your can download the processed datasets used in our paper here and unzip it to the folder of ```dataset```. <br>
-[Ubuntu_V1](https://drive.google.com/open?id=1-rNv34hLoZr300JF3v7nuLswM7GRqeNc) <br>
-[Douban](https://drive.google.com/open?id=1Cwt5BC_WDr1N_-TYaOMSHuOXLKAxXoMQ) <br>
-[E-commerce](https://drive.google.com/open?id=1vy2bcTCLm1Dzsdvh0cvPIw0XzrTK06us)
+Your can download the processed datasets and model checkpoints for reproduce the experimental results in the paper. <br>
+https://www.dropbox.com/sh/18gncqj296swzjg/AABtrQUpBi3JORai8zimNpNCa?dl=0
+
+Unzip the dataset.rar file to the folder of ```dataset``` and unzip the checkpoint.rar file to the folder of ```checkpoint```.
+
 
 ## Train a new model
 Take Ubuntu_V1 as an example.
