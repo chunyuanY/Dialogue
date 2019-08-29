@@ -26,6 +26,6 @@ The training process is recorded in ```log/[ubuntu|douban|alime].msn.log``` file
 ```
 python ./run.py --task "ubuntu"
 python ./run.py --task "douban"
-python ./run.py --task "douban"
+python ./run.py --task "alime"
 ```
 
