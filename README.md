@@ -10,8 +10,8 @@ Pytorch 1.1.0
 Your can download the processed datasets and the checkpoints of trained models for reproduce the experimental results in the paper. <br>
 https://www.dropbox.com/sh/18gncqj296swzjg/AABtrQUpBi3JORai8zimNpNCa?dl=0
 
-Unzip the dataset.rar file to the folder of ```dataset``` and unzip the checkpoint.rar file to the folder of ```checkpoint```.
-The "log/" directory already contains the training and evaluation logs of each dataset.
+Unzip the dataset.rar file to the folder of ```dataset``` and unzip the checkpoint.rar file to the folder of ```checkpoint```. <br>
+The ```log/``` directory already contains the training and evaluation logs of each dataset.
 
 ## Train a new model
 ```
