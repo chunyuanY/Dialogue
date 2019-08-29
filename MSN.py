@@ -84,7 +84,7 @@ class MSN(NeuralNetwork):
         self.args = args
         super(MSN, self).__init__()
 
-        self.word_embedding = nn.Embedding(num_embeddings=args.vocab_size, embedding_dim=200, padding_idx=0,
+        self.word_embedding = nn.Embedding(num_embeddings=len(word_embeddings), embedding_dim=200, padding_idx=0,
                                            _weight=torch.FloatTensor(word_embeddings))
 
         self.alpha = 0.5
@@ -115,9 +115,9 @@ class MSN(NeuralNetwork):
 
         self.affine2 = nn.Linear(in_features=3*3*64, out_features=300)
 
-        self.gru_acc = nn.GRU(input_size=300, hidden_size=300, batch_first=True)
+        self.gru_acc = nn.GRU(input_size=300, hidden_size=args.gru_hidden, batch_first=True)
         # self.attention = Attention(input_size=300, hidden_size=300)
-        self.affine_out = nn.Linear(in_features=300, out_features=1)
+        self.affine_out = nn.Linear(in_features=args.gru_hidden, out_features=1)
 
         self.tanh = nn.Tanh()
         self.relu = nn.ReLU()
@@ -249,18 +249,6 @@ class MSN(NeuralNetwork):
 
         V = self.tanh(self.affine2(Z))   # (bsz*max_utterances, 50)
         return V
-
-    # def embedding(self, U_or_R):
-    #     '''
-    #     :param U_or_R: (batch_size, max_utterances, max_u_words)  or (batch_size, max_r_words)
-    #     :return:
-    #     '''
-    #     if self.training:
-    #         mask = torch.cuda.FloatTensor(U_or_R.size()).uniform_() > 0.2
-    #         U_or_R = U_or_R * mask.long()
-    #     embed = self.word_embedding(U_or_R)
-    #     return embed
-
 
     def forward(self, bU, bR):
         '''
