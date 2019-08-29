@@ -5,32 +5,27 @@ from MSN import MSN
 import os
 os.environ["CUDA_VISIBLE_DEVICES"] = "0"
 
-task = 'ubuntu'
 task_dic = {
     'ubuntu':'./dataset/ubuntu_data/',
     'douban':'./dataset/DoubanConversaionCorpus/',
     'alime':'./dataset/E_commerce/'
 }
-
-path = task_dic[task]
-print("dataset: ", path)
-vocab, word_embeddings = pickle.load(file=open(path+"vocab_and_embeddings.pkl", 'rb'))
-model_cls = MSN
-
-data_bsz = {
-	"ubuntu": 200,
-	"douban": 150,
-	"alime":  200
+data_batch_size = {
+    "ubuntu": 200,
+    "douban": 150,
+    "alime":  200
 }
-batch_size = data_bsz[task]
-
 
 ## Required parameters
 parser = argparse.ArgumentParser()
-parser.add_argument("--vocab_size",
-                    default=len(vocab),
-                    type=int,
-                    help="The vocabulary size.")
+parser.add_argument("--task",
+                    default='ubuntu',
+                    type=str,
+                    help="The dataset used for training and test.")
+parser.add_argument("--is_training",
+                    default=False,
+                    type=bool,
+                    help="Training model or evaluating model?")
 parser.add_argument("--max_utterances",
                     default=10,
                     type=int,
@@ -40,17 +35,13 @@ parser.add_argument("--max_words",
                     type=int,
                     help="The maximum number of words for each utterance.")
 parser.add_argument("--batch_size",
-                    default=batch_size,
+                    default=0,
                     type=int,
                     help="The batch size.")
-parser.add_argument("--rnn1_hidden",
+parser.add_argument("--gru_hidden",
                     default=300,
                     type=int,
                     help="The hidden size of GRU in layer 1")
-parser.add_argument("--rnn2_hidden",
-                    default=300,
-                    type=int,
-                    help="The hidden size of GRU in layer 2")
 parser.add_argument("--learning_rate",
                     default=1e-3,
                     type=float,
@@ -64,35 +55,48 @@ parser.add_argument("--epochs",
                     type=float,
                     help="Total number of training epochs to perform.")
 parser.add_argument("--save_path",
-                    default="./checkpoint/" + task+ '.' + model_cls.__name__ + ".pt",
+                    default="./checkpoint/",
                     type=str,
                     help="The path to save model.")
 parser.add_argument("--score_file_path",
-                    default=path+"score_file.txt",
+                    default="score_file.txt",
                     type=str,
                     help="The path to save model.")
 args = parser.parse_args()
+args.batch_size = data_batch_size[args.task]
+args.save_path += args.task + '.' + MSN.__name__ + ".pt"
+args.score_file_path = task_dic[args.task] + args.score_file_path
+
 print(args)
+print("Task: ", args.task)
 
 
-def train(model_cls):
+def train_model():
+    path = task_dic[args.task]
     X_train_utterances, X_train_responses, y_train = pickle.load(file=open(path+"train.pkl", 'rb'))
     X_dev_utterances, X_dev_responses, y_dev = pickle.load(file=open(path+"test.pkl", 'rb'))
+    vocab, word_embeddings = pickle.load(file=open(path + "vocab_and_embeddings.pkl", 'rb'))
 
-    model = model_cls(word_embeddings, args=args)
+    model = MSN(word_embeddings, args=args)
     model.fit(
-        X_train_utterances,  X_train_responses, y_train,
+        X_train_utterances, X_train_responses, y_train,
         X_dev_utterances, X_dev_responses, y_dev
     )
 
-def test(model_cls):
+
+def test_model():
+    path = task_dic[args.task]
     X_test_utterances, X_test_responses, y_test = pickle.load(file=open(path+"test.pkl", 'rb'))
-    model = model_cls(word_embeddings, args=args)
+    vocab, word_embeddings = pickle.load(file=open(path + "vocab_and_embeddings.pkl", 'rb'))
+
+    model = MSN(word_embeddings, args=args)
     model.load_model(args.save_path)
     model.evaluate(X_test_utterances, X_test_responses, y_test, is_test=True)
 
-def test_adversarial(model_cls):
-    model = model_cls(word_embeddings, args=args)
+def test_adversarial():
+    path = task_dic[args.task]
+    vocab, word_embeddings = pickle.load(file=open(path + "vocab_and_embeddings.pkl", 'rb'))
+    model = MSN(word_embeddings, args=args)
     model.load_model(args.save_path)
     print("adversarial test set (k=1): ")
     X_test_utterances, X_test_responses, y_test = pickle.load(file=open(path+"test_adversarial_k_1.pkl", 'rb'))
@@ -104,14 +108,17 @@ def test_adversarial(model_cls):
     X_test_utterances, X_test_responses, y_test = pickle.load(file=open(path+"test_adversarial_k_3.pkl", 'rb'))
     model.evaluate(X_test_utterances, X_test_responses, y_test, is_test=True)
 
+
 if __name__ == '__main__':
     start = time.time()
-    # train(model_cls)
-    test(model_cls)
-    test_adversarial(model_cls)
+    if args.is_training:
+        train_model()
+        test_model()
+    else:
+        test_model()
+        # test_adversarial()
     end = time.time()
     print("use time: ", (end-start)/60, " min")
-
 
 
 
