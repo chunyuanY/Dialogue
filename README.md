@@ -16,14 +16,16 @@ Unzip the dataset.rar file to the folder of ```dataset``` and unzip the checkpoi
 ## Train a new model
 ```
 cd ./Dialogue/
-python .\run.py --task "ubuntu" --is_training True
-python .\run.py --task "douban" --is_training True
-python .\run.py --task "alime" --is_training True
+python ./run.py --task "ubuntu" --is_training True
+python ./run.py --task "douban" --is_training True
+python ./run.py --task "alime" --is_training True
 ```
 The training process is recorded in ```log/[ubuntu|douban|alime].msn.log``` file.
 
 ## Test a trained model
 ```
-python .\run.py --task "ubuntu"
+python ./run.py --task "ubuntu"
+python ./run.py --task "douban"
+python ./run.py --task "douban"
 ```
 
