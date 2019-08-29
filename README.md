@@ -11,7 +11,7 @@ Your can download the processed datasets and the checkpoints of trained models f
 https://www.dropbox.com/sh/18gncqj296swzjg/AABtrQUpBi3JORai8zimNpNCa?dl=0
 
 Unzip the dataset.rar file to the folder of ```dataset``` and unzip the checkpoint.rar file to the folder of ```checkpoint```.
-
+The "log/" directory already contains the training and evaluation logs of each dataset.
 
 ## Train a new model
 ```
