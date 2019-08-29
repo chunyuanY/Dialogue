@@ -6,12 +6,11 @@ This repository contains the source code and datasets for the EMNLP 2019 paper [
 Python 3.x <br>
 Pytorch 1.1.0
 
-## Datasets
-Your can download the processed datasets used in our paper here and unzip it to the folder of ```data```. <br>
+## Datasets and Trained Models
+Your can download the processed datasets used in our paper here and unzip it to the folder of ```dataset```. <br>
 [Ubuntu_V1](https://drive.google.com/open?id=1-rNv34hLoZr300JF3v7nuLswM7GRqeNc) <br>
-[Ubuntu_V2](https://drive.google.com/open?id=1tS_VC47z8CVPr-tZu0U4JEEwBT04N6ks) <br>
 [Douban](https://drive.google.com/open?id=1Cwt5BC_WDr1N_-TYaOMSHuOXLKAxXoMQ) <br>
-[Ecommerce](https://drive.google.com/open?id=1vy2bcTCLm1Dzsdvh0cvPIw0XzrTK06us)
+[E-commerce](https://drive.google.com/open?id=1vy2bcTCLm1Dzsdvh0cvPIw0XzrTK06us)
 
 ## Train a new model
 Take Ubuntu_V1 as an example.
