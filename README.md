@@ -15,6 +15,7 @@ The ```log/``` directory already contains the training and evaluation logs of ea
 
 ## Reproduce the experimental results by the pre-trained model
 ```
+cd ./Dialogue/
 python ./run.py --task "ubuntu"
 python ./run.py --task "douban"
 python ./run.py --task "alime"
