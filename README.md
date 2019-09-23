@@ -13,6 +13,13 @@ https://drive.google.com/drive/folders/1pJKIppcbjuTZxbTc8ye5mfnC2ygR2xTo?usp=sha
 Unzip the dataset.rar file to the folder of ```dataset``` and unzip the checkpoint.rar file to the folder of ```checkpoint```. <br>
 The ```log/``` directory already contains the training and evaluation logs of each dataset.
 
+## Reproduce the experimental results by the pre-trained model
+```
+python ./run.py --task "ubuntu"
+python ./run.py --task "douban"
+python ./run.py --task "alime"
+```
+
 ## Train a new model
 ```
 cd ./Dialogue/
@@ -21,11 +28,4 @@ python ./run.py --task "douban" --is_training True
 python ./run.py --task "alime" --is_training True
 ```
 The training process is recorded in ```log/[ubuntu|douban|alime].msn.log``` file.
-
-## Test a trained model
-```
-python ./run.py --task "ubuntu"
-python ./run.py --task "douban"
-python ./run.py --task "alime"
-```
 
