@@ -7,7 +7,7 @@ Python 3.x <br>
 Pytorch 1.1.0
 
 ## Datasets and Trained Models
-Your can download the processed datasets and the checkpoints of trained models for reproduce the experimental results in the paper. <br>
+Your can download the processed datasets and the checkpoints of trained models for reproduce the experimental results in the paper by the following url: <br>
 https://drive.google.com/drive/folders/1pJKIppcbjuTZxbTc8ye5mfnC2ygR2xTo?usp=sharing
 
 Unzip the dataset.rar file to the folder of ```dataset``` and unzip the checkpoint.rar file to the folder of ```checkpoint```. <br>
