@@ -30,3 +30,15 @@ python ./run.py --task "alime" --is_training True
 ```
 The training process is recorded in ```log/[ubuntu|douban|alime].msn.log``` file.
 
+
+## Citation
+If you find this code useful in your research, please cite our paper:
+```
+@inproceedings{yuan2019multi,
+  title={Multi-hop Selector Network for Multi-turn Response Selection in Retrieval-based Chatbots},
+  author={Yuan, Chunyuan and Zhou, Wei and Li, Mingming and Lv, Shangwen and Zhu, Fuqing and Han, Jizhong and Hu, Songlin},
+  booktitle={Proceedings of the 2019 Conference on Empirical Methods in Natural Language Processing and the 9th International Joint Conference on Natural Language Processing (EMNLP-IJCNLP)},
+  pages={111--120},
+  year={2019}
+}
+```
